@@ -9,6 +9,7 @@ import com.austral.jibberjabberposts.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -24,6 +25,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public PostListingDto getAllPosts() {
         List<Post> posts = postRepository.findAll();
+        posts.sort(Comparator.comparing(Post::getCreatedTime).reversed()); //Orders posts by most recent first
         return PostListingDto.from(posts);
     }
 
