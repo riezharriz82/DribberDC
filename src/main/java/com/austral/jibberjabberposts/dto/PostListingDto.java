@@ -16,7 +16,4 @@ public class PostListingDto {
 
     List<PostInfoDto> posts;
 
-    public static PostListingDto from(List<Post> posts) {
-        return new PostListingDto(posts.stream().map(PostInfoDto::from).collect(Collectors.toList()));
-    }
 }

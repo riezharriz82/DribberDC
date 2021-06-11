@@ -10,8 +10,7 @@ public interface PostService {
 
     PostListingDto getAllPosts();
 
-    PostInfoDto createPost(PostCreationDto postDto);
+    PostInfoDto createPost(PostCreationDto postDto, String userId);
 
     void deletePost(Long id);
-
 }

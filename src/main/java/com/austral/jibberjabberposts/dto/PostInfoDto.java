@@ -1,11 +1,13 @@
 package com.austral.jibberjabberposts.dto;
 
+import com.austral.jibberjabberposts.dto.users.ReducedUserDto;
 import com.austral.jibberjabberposts.model.Post;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -14,13 +16,13 @@ public class PostInfoDto {
 
     private Long id;
 
-    private String createdBy;
-
     LocalDateTime createdTime;
 
     String content;
 
-    public static PostInfoDto from(Post post) {
-        return new PostInfoDto(post.getId(), post.getCreatedBy(), post.getCreatedTime(), post.getContent());
+    ReducedUserDto reducedUserDto;
+
+    public static PostInfoDto from(Post post, ReducedUserDto reducedUserDto) {
+        return new PostInfoDto(post.getId(), post.getCreatedTime(), post.getContent(),reducedUserDto);
     }
 }

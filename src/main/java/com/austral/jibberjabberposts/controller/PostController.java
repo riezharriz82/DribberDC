@@ -4,7 +4,6 @@ import com.austral.jibberjabberposts.dto.PostCreationDto;
 import com.austral.jibberjabberposts.dto.PostInfoDto;
 import com.austral.jibberjabberposts.dto.PostListingDto;
 import com.austral.jibberjabberposts.service.PostService;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,8 +22,8 @@ public class PostController {
     }
 
     @PostMapping("/create")
-    public PostInfoDto createPost (@RequestBody PostCreationDto postCreationDto) {
-        return postService.createPost(postCreationDto);
+    public PostInfoDto createPost (@RequestBody PostCreationDto postCreationDto, @RequestHeader("userId") String userId) {
+        return postService.createPost(postCreationDto,userId);
     }
 
     @DeleteMapping("/delete/{id}")

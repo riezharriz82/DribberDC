@@ -10,8 +10,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PostCreationDto {
     @NotNull
-    private String createdBy;
-
-    @NotNull
     private String content;
 }

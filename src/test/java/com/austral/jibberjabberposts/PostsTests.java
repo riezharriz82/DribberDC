@@ -24,26 +24,25 @@ public class PostsTests {
 
     @Test
     void createPost() {
-        PostCreationDto postCreationDto = new PostCreationDto("Nicolas Gioino", "Test Tweet!");
-        PostInfoDto response = postService.createPost(postCreationDto);
-        Assertions.assertEquals("Nicolas Gioino",response.getCreatedBy());
+        PostCreationDto postCreationDto = new PostCreationDto("Test Tweet!");
+        PostInfoDto response = postService.createPost(postCreationDto,"mockedId");
         Assertions.assertEquals("Test Tweet!",response.getContent());
     }
 
     @Test
     void checkPostCount() {
-        PostCreationDto postCreationDto = new PostCreationDto("Nicolas Gioino", "Test Tweet!");
-        postService.createPost(postCreationDto);
-        postService.createPost(postCreationDto);
-        postService.createPost(postCreationDto);
+        PostCreationDto postCreationDto = new PostCreationDto("Test Tweet!");
+        postService.createPost(postCreationDto,"mockedId");
+        postService.createPost(postCreationDto,"mockedId");
+        postService.createPost(postCreationDto,"mockedId");
         PostListingDto postListingDto = postService.getAllPosts();
         Assertions.assertEquals(3,postListingDto.getPosts().size());
     }
 
     @Test
     void checkPostDeletedCorrectly() {
-        PostCreationDto postCreationDto = new PostCreationDto("Nicolas Gioino", "Test Tweet!");
-        PostInfoDto postInfoDto = postService.createPost(postCreationDto);
+        PostCreationDto postCreationDto = new PostCreationDto("Test Tweet!");
+        PostInfoDto postInfoDto = postService.createPost(postCreationDto,"mockedId");
         postService.deletePost(postInfoDto.getId());
         PostListingDto postListingDto = postService.getAllPosts();
         Assertions.assertEquals(0,postListingDto.getPosts().size());
