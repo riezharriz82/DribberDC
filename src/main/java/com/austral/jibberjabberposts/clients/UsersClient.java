@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 public class UsersClient {
-    private final String USER_SERVICE_URL = "http://jibber-jabber-user:8081/users";
+    private final String USER_SERVICE_URL = "http://jibber-jabber-user:8080/users";
     private final RestTemplate restTemplate;
 
     public UsersClient() {
