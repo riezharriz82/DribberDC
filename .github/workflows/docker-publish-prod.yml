@@ -1,13 +1,11 @@
-name: Docker publish
+name: Docker publish Prod
 
 on:
   push:
-    # Publish `v1.2.3` tags as releases.
-    tags:
-      - v*
+    branches: [master]
 
 env:
-  IMAGE_NAME: jibber-jabber-posts
+  IMAGE_NAME: jibber-jabber-posts-prod
 
 jobs:
   # Run tests.
@@ -67,5 +65,5 @@ jobs:
           echo IMAGE_ID=$IMAGE_ID
           echo BRANCH_NAME=$BRANCH_NAME
 
-          docker tag $IMAGE_NAME $IMAGE_ID:$BRANCH_NAME
-          docker push $IMAGE_ID:$BRANCH_NAME
+          docker tag $IMAGE_NAME $IMAGE_ID:latest
+          docker push $IMAGE_ID:latest
