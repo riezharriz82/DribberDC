@@ -2,7 +2,7 @@ name: Docker publish Dev
 
 on:
   push:
-    branches: [dev]
+    branches: [ dev]
 
 env:
   IMAGE_NAME: jibber-jabber-posts-dev
