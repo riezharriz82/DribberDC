@@ -1,13 +1,11 @@
-name: Docker publish
+name: Docker publish Prod
 
 on:
   push:
-    # Publish `v1.2.3` tags as releases.
-    tags:
-      - v*
+    branches: [master]
 
 env:
-  IMAGE_NAME: jibber-jabber-posts
+  IMAGE_NAME: jibber-jabber-posts-prod
 
 jobs:
   # Run tests.
