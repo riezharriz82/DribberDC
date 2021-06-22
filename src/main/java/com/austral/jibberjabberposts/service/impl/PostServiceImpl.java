@@ -54,4 +54,16 @@ public class PostServiceImpl implements PostService {
     public void deletePost(Long id) {
         postRepository.deleteById(id);
     }
+
+    @Override
+    public PostListingDto findAllByCreatorId(String creatorId) {
+        List<Post> posts = postRepository.findAllByCreatorId(creatorId);
+        List<PostInfoDto> returnPosts = new ArrayList<>();
+        posts.sort(Comparator.comparing(Post::getCreatedTime).reversed());//Orders posts by most recent first
+        posts.forEach((post -> {
+            ReducedUserDto creatorDto = usersClient.getUserById(post.getCreatorId());
+            returnPosts.add(PostInfoDto.from(post,creatorDto));
+        }));
+        return new PostListingDto(returnPosts);
+    }
 }

@@ -13,4 +13,6 @@ public interface PostService {
     PostInfoDto createPost(PostCreationDto postDto, String userId);
 
     void deletePost(Long id);
+
+    PostListingDto findAllByCreatorId(String creatorId);
 }

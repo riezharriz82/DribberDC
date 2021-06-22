@@ -7,4 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post,Long> {
+
+    List<Post> findAllByCreatorId(String creatorId);
 }
