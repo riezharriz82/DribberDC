@@ -1,6 +1,8 @@
 name: Docker publish Dev
 
 on:
+  repository_dispatch:
+  workflow_dispatch:
   push:
     branches: [ dev]
 
