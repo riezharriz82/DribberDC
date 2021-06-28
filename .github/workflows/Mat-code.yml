@@ -1,10 +1,11 @@
 # This workflow will build a Java project with Gradle
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
-name: MatDC
+name: Mat Gradle
 
-on: [pull_request, workflow_dispatch]
-
+on:
+  repository_dispatch:
+  workflow_dispatch:
 jobs:
   build:
     strategy:
@@ -27,32 +28,7 @@ jobs:
         distribution: 'adopt'
         java-version: ${{matrix.java}}
     - name: Grant execute permission for gradlew
-
-    - uses: actions/checkout@v2
-
-    - name: Build image
-      run: docker build . --file Dockerfile --tag $IMAGE_NAME
-
-    - name: Log into registry
-      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
-
-      - name: Push image
-      run: |
-          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
-
-          # Change all uppercase to lowercase
-          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
-
-          # Strip git ref prefix from BRANCH_NAME
-          BRANCH_NAME=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
-
-          # Strip "v" prefix from tag name
-          [[ "${{ github.ref }}" == "refs/tags/"* ]] && BRANCH_NAME=$(echo $BRANCH_NAME | sed -e 's/^v//')
-
-          [ "$BRANCH_NAME" == "master" ] && BRANCH_NAME=production
-
-          echo IMAGE_ID=$IMAGE_ID
-          echo BRANCH_NAME=$BRANCH_NAME
-
-          docker tag $IMAGE_NAME $IMAGE_ID:latest
-          docker push $IMAGE_ID:latest
+      if: ${{ runner.os != 'Windows' }}
+      run: chmod +x gradlew
+    - name: Build with Gradle
+      run: ./gradlew collectArtifacts
