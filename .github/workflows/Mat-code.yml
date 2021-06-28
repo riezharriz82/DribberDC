@@ -27,12 +27,7 @@ jobs:
         distribution: 'adopt'
         java-version: ${{matrix.java}}
     - name: Grant execute permission for gradlew
-      if: ${{ runner.os != 'Windows' }}
-      run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew collectArtifacts
 
-    steps:
     - uses: actions/checkout@v2
 
     - name: Build image
